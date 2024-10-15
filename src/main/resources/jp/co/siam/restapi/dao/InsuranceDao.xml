@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.siam.restapi.dao.InsuranceContractInfoDao">
+	<insert id="insertInsurance" parameterType="jp.co.siam.restapi.entity.InsuranceContractInfoEntity">
+		insert into Insurance (
+			InsuranceCompanyId,
+			InsurancePlanName,
+			InsuranceContractNumber,
+			CustomerNameKana,
+			CustomerName,
+			Relationship,
+			InsuredNameKana,
+			InsuredName,
+			CustomerSex,
+			CustomerBirthday,
+			CustomerPhoneNumber,
+			CustomerAddress,
+			CustomerEmail,
+			ContractAmount,
+			ContractDate,
+			EmployeeId
+		)
+		values (
+			#{InsuranceCompanyId},
+			#{InsurancePlanName},
+			#{InsuranceContractNumber},
+			#{CustomerNameKana},
+			#{CustomerName},
+			#{Relationship},
+			#{InsuredNameKana},
+			#{InsuredName},
+			#{CustomerSex},
+			#{CustomerBirthday},
+			#{CustomerPhoneNumber},
+			#{CustomerAddress},
+			#{CustomerEmail},
+			#{ContractAmount},
+			#{ContractDate},
+			#{EmployeeId}
+		)
+	</insert>
+	
+	
+</mapper>

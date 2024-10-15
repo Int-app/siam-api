@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.siam.restapi.dao.LoginDao">
+	<select id="selectAll" resultType="jp.co.siam.restapi.entity.LoginUserInfoEntity">
+		select * 
+		from M_LoginUserInfo;
+	</select>
+	
+	<!-- １件取得 -->
+	<select id="selectByPrimaryKey" resultType="jp.co.siam.restapi.entity.LoginUserInfoEntity">
+		select * 
+		from M_LoginUserInfo
+		where Username = #{Username}
+	</select>
+	
+</mapper>

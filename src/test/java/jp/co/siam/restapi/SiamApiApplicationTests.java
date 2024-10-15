@@ -1,10 +1,10 @@
-package com.bezkoder.spring.restapi;
+package jp.co.siam.restapi;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SpringBoot3RestApiExampleApplicationTests {
+class SiamApiApplicationTests {
 
 	@Test
 	void contextLoads() {
