@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+    <classPathEntry
+            location="C:\Users\liubin\.m2\repository\com\microsoft\sqlserver\mssql-jdbc\11.2.2.jre11\mssql-jdbc-11.2.2.jre11.jar" />
+    <context id="context1" targetRuntime="MyBatis3">
+
+        <!--  MapperにMapperアノテーションを付与   -->
+        <plugin type="org.mybatis.generator.plugins.MapperAnnotationPlugin"/>
+        <!--  equalsおよびhashCodeを自動生成      -->
+        <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"/>
+        <!-- マッパxmlファイルを生成時に上書きするためのプラグイン -->
+        <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin"/>
+
+        <!-- コメント生成の抑制 -->
+        <commentGenerator>
+            <property name="suppressDate" value="true" />
+            <property name="addRemarkComments" value="false" />
+        </commentGenerator>
+
+        <!--     JDBCの設定 -->
+        <jdbcConnection
+                driverClass="com.microsoft.sqlserver.jdbc.SQLServerDriver"
+                connectionURL="jdbc:sqlserver://101.32.19.90:1433;databaseName=master;encrypt=false;trustServerCertificate=true"
+                userId="sa"
+                password="Mima@Passw0rd"
+        />
+
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!--  Entityの生成場所 -->
+        <javaModelGenerator
+                targetPackage="jp.co.siam.restapi.entity"
+                targetProject="src/main/java/"
+        />
+        <!--  Mapper(xml)の生成場所 -->
+        <sqlMapGenerator
+                targetPackage="jp.co.siam.restapi.dao"
+                targetProject="src/main/resources/"
+        />
+
+        <!--  Mapper(java)の生成場所 -->
+        <javaClientGenerator
+                targetPackage="jp.co.siam.restapi.dao"
+                targetProject="src/main/java/"
+                type="XMLMAPPER"
+        />
+
+        <!--  生成対象のテーブル -->
+<!--        <table tableName="t_insurancecontractinfo"  modelType="hierarchical">-->
+        <table tableName="t_insurancecontractinfo"  modelType="hierarchical">
+            <domainObjectRenamingRule searchString="^[^_]" replaceString="" />
+            <columnOverride column="InsuranceContractNumber" javaType="java.lang.String" jdbcType="VARCHAR" />
+        </table>
+    </context>
+</generatorConfiguration>
