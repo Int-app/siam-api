@@ -1,22 +1,33 @@
 package jp.co.siam.restapi.controller;
 
+import jp.co.siam.restapi.common.ResponseCode;
+import jp.co.siam.restapi.common.ResponseResult;
+import jp.co.siam.restapi.entity.Employeeinfo;
+import jp.co.siam.restapi.jwt.annotation.UserLoginToken;
+import jp.co.siam.restapi.jwt.service.TokenService;
+import jp.co.siam.restapi.service.EmployerService;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*;
 import jp.co.siam.restapi.entity.LoginUserInfoEntity;
 import jp.co.siam.restapi.service.LoginService;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/users")
 public class LoginController {
   @Autowired
   LoginService loginService;
+
+	@Autowired
+	EmployerService employerService;
+
+	@Autowired
+	TokenService tokenService;
+
 
   @PostMapping("/login")
   public ResponseEntity<String> login(@RequestBody LoginUserInfoEntity loginUserInfo) {
@@ -29,7 +40,23 @@ public class LoginController {
 	  data.put("data", json);
 	return ResponseEntity.ok(data.toString());
   }
-  
+
+	@PostMapping("/loginv2")
+	public ResponseResult loginv2(@RequestParam("employeeId") String employeeId, @RequestParam("passwd") String passwd) {
+		Employeeinfo employeeInfo = employerService.getEmployeeinfo(employeeId);
+		if(employeeInfo==null){
+			return new ResponseResult(ResponseCode.FAIL, String.format("login fail,user %s not exist",employeeId),null);
+		}
+		if (!employeeInfo.getPassword().equals(passwd)){
+			return new ResponseResult(ResponseCode.FAIL, "login fail,passwd is wrong",null);
+		}
+
+		String token = tokenService.getToken(employeeInfo);
+		Map data = new HashMap();
+		data.put("token", token);
+		return new ResponseResult(ResponseCode.SUCCESS, "login success",data);
+  }
+
   @GetMapping("/info")
   public ResponseEntity<String> info() {
 	  JSONObject data = new JSONObject();
@@ -41,7 +68,14 @@ public class LoginController {
 	  data.put("message", "ユーザ情報を取得しました。");
 	return ResponseEntity.ok(data.toString());
   }
-  
+
+	@UserLoginToken
+	@GetMapping("/get_employee_info")
+	public ResponseResult getEmployeeInfo(@RequestParam("employeeId") String employeeId) {
+		Employeeinfo employeeInfo = employerService.getEmployeeinfo(employeeId);
+		return new ResponseResult(ResponseCode.SUCCESS, "success",employeeInfo);
+	}
+
   private String getRoles(String code) {
 	  String rolse="";
 	  switch (code) {
@@ -55,7 +89,7 @@ public class LoginController {
 		  rolse="user";
 		  break;
 	  }
-		
+
 	  return rolse;
 
   }

@@ -1,5 +1,6 @@
 package jp.co.siam.restapi.common;
 
+import com.auth0.jwt.exceptions.JWTVerificationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -31,4 +32,11 @@ public class GlobalExceptionHandler {
             logger.error(e.getMessage(),e);
             return new ResponseResult(ResponseCode.FAIL, e.getMessage(),null);
     }
+
+    @ExceptionHandler(value = JWTVerificationException.class)
+    public ResponseResult handle3(JWTVerificationException e){
+        logger.error(e.getMessage(),e);
+        return new ResponseResult(ResponseCode.FAIL, e.getMessage(),null);
+    }
+
 }

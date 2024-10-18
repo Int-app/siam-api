@@ -21,16 +21,16 @@ public class InsuranceContractInfoController {
   @Autowired
   InsuranceContractInfoService insuranceContractInfoService;
 
-   @GetMapping("/get/{insurancecontractid}")
+   @PostMapping("/get/{insurancecontractid}")
    @ApiOperation("get")
-    public ResponseResult getInsuranceContractInfos( @PathVariable("insurancecontractid") Integer insurancecontractid) {
+    public ResponseResult<Insurancecontractinfo> getInsuranceContractInfos( @PathVariable("insurancecontractid") Integer insurancecontractid) {
         Insurancecontractinfo insurancecontractinfo= insuranceContractInfoService.getInsurancecontractinfo(insurancecontractid);
         return new ResponseResult(ResponseCode.SUCCESS, "",insurancecontractinfo);
     }
 
-    @GetMapping("/get_list_bypage")
+    @PostMapping("/get_list_bypage")
     @ApiOperation("get_list_bypage")
-    public ResponseResult getInsuranceContractInfosByPage(@RequestBody InsurancecontractinfoFindParam findParam) {
+    public ResponseResult<Insurancecontractinfo> getInsuranceContractInfosByPage(@RequestBody InsurancecontractinfoFindParam findParam) {
 
         PageInfo<Insurancecontractinfo> insurancecontractinfos= insuranceContractInfoService.getInsuranceContractInfoByPage(findParam);
         return new ResponseResult(ResponseCode.SUCCESS, "",insurancecontractinfos);
