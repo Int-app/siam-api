@@ -3,8 +3,8 @@ package jp.co.siam.restapi.common;
 
 public final class ResponseCode {
 
-    public static final String SUCCESS = "SUCCESS";
+    public static final int SUCCESS = 0;
 
-    public static final String FAIL = "FAIL";
+    public static final int FAIL = 1;
 
 }

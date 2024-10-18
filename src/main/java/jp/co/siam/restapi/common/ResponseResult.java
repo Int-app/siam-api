@@ -5,7 +5,7 @@ import java.io.Serializable;
 
 public class ResponseResult<T> implements Serializable {
 
-    private String statusCode;
+    private int code;
 
     private String message;
 
@@ -14,18 +14,18 @@ public class ResponseResult<T> implements Serializable {
     public ResponseResult() {
     }
 
-    public ResponseResult(String statusCode, String message, T data) {
-        this.statusCode = statusCode;
+    public ResponseResult(int statusCode, String message, T data) {
+        this.code = statusCode;
         this.message = message;
         this.data = data;
     }
 
-    public String getStatusCode() {
-        return statusCode;
+    public int getCode() {
+        return code;
     }
 
-    public void setStatusCode(String statusCode) {
-        this.statusCode = statusCode;
+    public void setCode(int code) {
+        this.code = code;
     }
 
     public String getMessage() {
