@@ -1,10 +1,13 @@
 package jp.co.siam.restapi.common;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.io.Serializable;
 
-
+@ApiModel("response")
 public class ResponseResult<T> implements Serializable {
-
+    @ApiModelProperty("resultcode")
     private int code;
 
     private String message;
