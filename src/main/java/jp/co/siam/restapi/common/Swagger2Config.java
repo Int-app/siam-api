@@ -27,12 +27,12 @@ public class Swagger2Config {
                 //配置网站的基本信息
                 .apiInfo(new ApiInfoBuilder()
                         //网站标题
-                        .title("TienChin项目在线接口文档")
+                        .title("online document")
                         //标题后面的版本号
                         .version("v1.0")
-                        .description("TienChin项目接口文档")
+                        .description("online document")
                         //联系人信息
-                        .contact(new Contact("javaboy", "http://www.javaboy.org", "111@qq.com"))
+                        .contact(new Contact("", "", ""))
                         .build())
                 .select()
                 //指定接口的位置
