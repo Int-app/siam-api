@@ -3,17 +3,16 @@ package jp.co.siam.restapi.entity;
 import jp.co.siam.restapi.common.mybatis.PagingParameter;
 
 public class InsurancecontractinfoFindParam extends PagingParameter {
-    private Integer insurancecompanyid;
+
+    private String insuranceCompanyName;
 
     private String insurancecontractnumber;
 
-    public Integer getInsurancecompanyid() {
-        return insurancecompanyid;
-    }
+    private Integer employeeId;
 
-    public void setInsurancecompanyid(Integer insurancecompanyid) {
-        this.insurancecompanyid = insurancecompanyid;
-    }
+    private String employeeName;
+
+
 
     public String getInsurancecontractnumber() {
         return insurancecontractnumber;
@@ -21,5 +20,29 @@ public class InsurancecontractinfoFindParam extends PagingParameter {
 
     public void setInsurancecontractnumber(String insurancecontractnumber) {
         this.insurancecontractnumber = insurancecontractnumber;
+    }
+
+    public Integer getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(Integer employeeId) {
+        this.employeeId = employeeId;
+    }
+
+    public String getEmployeeName() {
+        return employeeName;
+    }
+
+    public void setEmployeeName(String employeeName) {
+        this.employeeName = employeeName;
+    }
+
+    public String getInsuranceCompanyName() {
+        return insuranceCompanyName;
+    }
+
+    public void setInsuranceCompanyName(String insuranceCompanyName) {
+        this.insuranceCompanyName = insuranceCompanyName;
     }
 }

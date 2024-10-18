@@ -31,6 +31,7 @@ public class InsuranceContractInfoController {
     @GetMapping("/get_list_bypage")
     @ApiOperation("get_list_bypage")
     public ResponseResult getInsuranceContractInfosByPage(@RequestBody InsurancecontractinfoFindParam findParam) {
+       
         PageInfo<InsurancecontractinfoWithBLOBs> insurancecontractinfos= insuranceContractInfoService.getInsuranceContractInfoByPage(findParam);
         return new ResponseResult(ResponseCode.SUCCESS, "",insurancecontractinfos);
     }
