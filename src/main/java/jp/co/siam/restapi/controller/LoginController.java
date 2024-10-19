@@ -29,19 +29,19 @@ public class LoginController {
 	TokenService tokenService;
 
 
-  @PostMapping("/login")
-  public ResponseEntity<String> login(@RequestBody LoginUserInfoEntity loginUserInfo) {
-	  LoginUserInfoEntity userInfo = loginService
-      .selectByPrimaryKey(loginUserInfo);
-	  JSONObject data = new JSONObject();
-	  data.put("code", 0);
-	  JSONObject json = new JSONObject();
-	  json.put("token", userInfo.getToken());
-	  data.put("data", json);
-	return ResponseEntity.ok(data.toString());
-  }
+//  @PostMapping("/login")
+//  public ResponseEntity<String> login(@RequestBody LoginUserInfoEntity loginUserInfo) {
+//	  LoginUserInfoEntity userInfo = loginService
+//      .selectByPrimaryKey(loginUserInfo);
+//	  JSONObject data = new JSONObject();
+//	  data.put("code", 0);
+//	  JSONObject json = new JSONObject();
+//	  json.put("token", userInfo.getToken());
+//	  data.put("data", json);
+//	return ResponseEntity.ok(data.toString());
+//  }
 
-	@PostMapping("/loginv2")
+	@PostMapping("/login")
 	public ResponseResult loginv2(@RequestParam("employeeId") String employeeId, @RequestParam("passwd") String passwd) {
 		Employeeinfo employeeInfo = employerService.getEmployeeinfo(employeeId);
 		if(employeeInfo==null){
@@ -70,7 +70,7 @@ public class LoginController {
   }
 
 	@UserLoginToken
-	@GetMapping("/get_employee_info")
+	@GetMapping("/get_info")
 	public ResponseResult getEmployeeInfo(@RequestParam("employeeId") String employeeId) {
 		Employeeinfo employeeInfo = employerService.getEmployeeinfo(employeeId);
 		return new ResponseResult(ResponseCode.SUCCESS, "success",employeeInfo);
