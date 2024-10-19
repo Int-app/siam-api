@@ -42,12 +42,12 @@ public class LoginController {
 //  }
 
 	@PostMapping("/login")
-	public ResponseResult loginv2(@RequestParam("username") String employeeId, @RequestParam("password") String passwd) {
-		Employeeinfo employeeInfo = employerService.getEmployeeinfo(employeeId);
+	public ResponseResult loginv2(@RequestBody LoginUserInfoEntity loginUserInfo) {
+		Employeeinfo employeeInfo = employerService.getEmployeeinfo(loginUserInfo.getUsername());
 		if(employeeInfo==null){
-			return new ResponseResult(ResponseCode.FAIL, String.format("login fail,user %s not exist",employeeId),null);
+			return new ResponseResult(ResponseCode.FAIL, String.format("login fail,user %s not exist",loginUserInfo.getUsername()),null);
 		}
-		if (!employeeInfo.getPassword().equals(passwd)){
+		if (!employeeInfo.getPassword().equals(loginUserInfo.getPassword())){
 			return new ResponseResult(ResponseCode.FAIL, "login fail,passwd is wrong",null);
 		}
 
