@@ -42,7 +42,7 @@ public class LoginController {
 //  }
 
 	@PostMapping("/login")
-	public ResponseResult loginv2(@RequestParam("employeeId") String employeeId, @RequestParam("passwd") String passwd) {
+	public ResponseResult loginv2(@RequestParam("username") String employeeId, @RequestParam("password") String passwd) {
 		Employeeinfo employeeInfo = employerService.getEmployeeinfo(employeeId);
 		if(employeeInfo==null){
 			return new ResponseResult(ResponseCode.FAIL, String.format("login fail,user %s not exist",employeeId),null);
