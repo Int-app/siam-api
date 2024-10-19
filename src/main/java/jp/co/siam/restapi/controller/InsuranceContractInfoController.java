@@ -11,6 +11,7 @@ import jp.co.siam.restapi.service.InsuranceContractInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -53,6 +54,7 @@ public class InsuranceContractInfoController {
     @PostMapping("/create")
     @ApiOperation("create")
     public ResponseResult createInsuranceContractInfo(@RequestBody Insurancecontractinfo insurancecontractinfo) {
+        insurancecontractinfo.setUpdateddate(new Date());
         int count= insuranceContractInfoService.createInsuranceContractInfo(insurancecontractinfo);
         return new ResponseResult(ResponseCode.SUCCESS, "",count);
     }
