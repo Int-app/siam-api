@@ -3,6 +3,8 @@ package jp.co.siam.restapi.entity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @ApiModel("保険契約情報")
@@ -25,6 +27,7 @@ public class Insurancecontractinfo {
      * @mbg.generated
      */
     @ApiModelProperty("保険会社Id")
+    @NotBlank(message = "insurancecompanyidにnullはできません")
     private String insurancecompanyid;
 
     /**
@@ -55,6 +58,7 @@ public class Insurancecontractinfo {
      * @mbg.generated
      */
     @ApiModelProperty("契約者(姓)")
+    @NotBlank(message = "contractorfamilynameにnullはできません")
     private String contractorfamilyname;
 
     /**
@@ -65,6 +69,7 @@ public class Insurancecontractinfo {
      * @mbg.generated
      */
     @ApiModelProperty("契約者(名)")
+    @NotBlank(message = "contractorgivennameにnullはできません")
     private String contractorgivenname;
 
     /**
@@ -75,6 +80,7 @@ public class Insurancecontractinfo {
      * @mbg.generated
      */
     @ApiModelProperty("契約者(セイ)")
+    @NotBlank(message = "contractorfamilynamekにnullはできません")
     private String contractorfamilynamek;
 
     /**
@@ -85,6 +91,7 @@ public class Insurancecontractinfo {
      * @mbg.generated
      */
     @ApiModelProperty("契約者(メイ)")
+    @NotBlank(message = "contractorgivennamekにnullはできません")
     private String contractorgivennamek;
 
     /**
@@ -95,6 +102,7 @@ public class Insurancecontractinfo {
      * @mbg.generated
      */
     @ApiModelProperty("契約日")
+    @NotNull(message = "contractdateにnullはできません")
     private Date contractdate;
 
     /**
@@ -105,6 +113,7 @@ public class Insurancecontractinfo {
      * @mbg.generated
      */
     @ApiModelProperty("保険開始日")
+    @NotNull(message = "insurancestartdateにnullはできません")
     private Date insurancestartdate;
 
     /**
@@ -135,6 +144,7 @@ public class Insurancecontractinfo {
      * @mbg.generated
      */
     @ApiModelProperty("保険金額")
+    @NotNull(message = "insuranceamountにnullはできません")
     private Integer insuranceamount;
 
     /**
@@ -155,6 +165,7 @@ public class Insurancecontractinfo {
      * @mbg.generated
      */
     @ApiModelProperty("契約者との関係")
+    @NotNull(message = "relationshipにnullはできません")
     private Integer relationship;
 
     /**
@@ -175,6 +186,7 @@ public class Insurancecontractinfo {
      * @mbg.generated
      */
     @ApiModelProperty("被保険者(姓)")
+    @NotBlank(message = "insuredpersonfamilynameにnullはできません")
     private String insuredpersonfamilyname;
 
     /**
@@ -185,6 +197,7 @@ public class Insurancecontractinfo {
      * @mbg.generated
      */
     @ApiModelProperty("被保険者(名)")
+    @NotBlank(message = "insuredpersongivennameにnullはできません")
     private String insuredpersongivenname;
 
     /**
@@ -195,6 +208,7 @@ public class Insurancecontractinfo {
      * @mbg.generated
      */
     @ApiModelProperty("被保険者(セイ)")
+    @NotBlank(message = "insuredpersonfamilynamekにnullはできません")
     private String insuredpersonfamilynamek;
 
     /**
@@ -205,6 +219,7 @@ public class Insurancecontractinfo {
      * @mbg.generated
      */
     @ApiModelProperty("被保険者(メイ)")
+    @NotBlank(message = "insuredpersongivennamekにnullはできません")
     private String insuredpersongivennamek;
 
     /**
@@ -215,6 +230,7 @@ public class Insurancecontractinfo {
      * @mbg.generated
      */
     @ApiModelProperty("性別")
+    @NotNull(message = "sexにnullはできません")
     private Integer sex;
 
     /**
@@ -315,6 +331,7 @@ public class Insurancecontractinfo {
      * @mbg.generated
      */
     @ApiModelProperty("社員番号")
+    @NotBlank(message = "employeeidにnullはできません")
     private String employeeid;
 
     /**
@@ -335,6 +352,7 @@ public class Insurancecontractinfo {
      * @mbg.generated
      */
     @ApiModelProperty("初年度手数料")
+    @NotNull(message = "initialcommissionにnullはできません")
     private Integer initialcommission;
 
     /**
@@ -345,6 +363,7 @@ public class Insurancecontractinfo {
      * @mbg.generated
      */
     @ApiModelProperty("支給方式")
+    @NotNull(message = "paymentmethodにnullはできません")
     private Integer paymentmethod;
 
     /**

@@ -152,7 +152,7 @@
     select
     <include refid="Base_Column_List" />
     from T_InsuranceContractInfo
-    where 1=1
+    where DeleteFlag!=1
     <if test="findParam.insurancecontractnumber!=null">
       and InsuranceContractNumber = #{findParam.insurancecontractnumber}
     </if>

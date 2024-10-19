@@ -5,11 +5,13 @@ import com.github.pagehelper.PageInfo;
 import jp.co.siam.restapi.dao.InsurancecontractinfoMapper;
 import jp.co.siam.restapi.entity.*;
 import jp.co.siam.restapi.validation.ValidationUtils;
+import org.apache.tomcat.util.buf.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import javax.validation.ValidationException;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,6 +27,8 @@ public class InsuranceContractInfoService {
 		if (errors != null) {
 			throw new ValidationException(errors);
 		}
+		insurancecontractinfo.setUpdatedby(insurancecontractinfo.getEmployeeid());
+		insurancecontractinfo.setUpdateddate(new Date());
   		InsurancecontractinfoExample example = new InsurancecontractinfoExample();
 		example.or()
 				.andInsurancecontractidEqualTo(insurancecontractinfo.getInsurancecontractid());
@@ -43,7 +47,11 @@ public class InsuranceContractInfoService {
 		InsurancecontractinfoExample example = new InsurancecontractinfoExample();
 		example.or()
 				.andInsurancecontractidEqualTo(insurancecontractid);
-		return insurancecontractinfoMapper.deleteByExample(example);
+		Insurancecontractinfo info = new Insurancecontractinfo();
+		info.setDeleteflag(1);
+		info.setUpdateddate(new Date());
+		info.setInsurancecontractid(insurancecontractid);
+		return insurancecontractinfoMapper.updateByExampleSelective(info,example);
 	}
 
 	public int createInsuranceContractInfo(Insurancecontractinfo insurancecontractinfo) {
@@ -51,6 +59,11 @@ public class InsuranceContractInfoService {
 		if (errors != null) {
 			throw new ValidationException(errors);
 		}
+		insurancecontractinfo.setDeleteflag(0);
+		insurancecontractinfo.setCreatedby(insurancecontractinfo.getEmployeeid());
+		insurancecontractinfo.setCreateddate(new Date());
+		insurancecontractinfo.setUpdatedby(insurancecontractinfo.getEmployeeid());
+		insurancecontractinfo.setUpdateddate(new Date());
 		return insurancecontractinfoMapper.insertSelective(insurancecontractinfo);
   }
 

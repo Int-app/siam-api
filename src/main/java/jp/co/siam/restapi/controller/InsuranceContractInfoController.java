@@ -54,7 +54,6 @@ public class InsuranceContractInfoController {
     @PostMapping("/create")
     @ApiOperation("create")
     public ResponseResult createInsuranceContractInfo(@RequestBody Insurancecontractinfo insurancecontractinfo) {
-        insurancecontractinfo.setUpdateddate(new Date());
         int count= insuranceContractInfoService.createInsuranceContractInfo(insurancecontractinfo);
         return new ResponseResult(ResponseCode.SUCCESS, "",count);
     }

@@ -4,9 +4,9 @@ server:
 spring:
   datasource:
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
-    url: jdbc:sqlserver://localhost:1433;databaseName=master;encrypt=false;trustServerCertificate=true
+    url: jdbc:sqlserver://101.32.19.90:1433;databaseName=master;encrypt=false;trustServerCertificate=true
     username: sa
-    password: 123456
+    password: Mima@Passw0rd
   mvc:
     path match:
       matching-strategy: ANT_PATH_MATCHER

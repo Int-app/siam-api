@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import jp.co.siam.restapi.entity.LoginUserInfoEntity;
-import jp.co.siam.restapi.service.LoginService;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,8 +18,6 @@ import java.util.Map;
 @RestController
 @RequestMapping("/users")
 public class LoginController {
-  @Autowired
-  LoginService loginService;
 
 	@Autowired
 	EmployerService employerService;
@@ -29,20 +26,8 @@ public class LoginController {
 	TokenService tokenService;
 
 
-//  @PostMapping("/login")
-//  public ResponseEntity<String> login(@RequestBody LoginUserInfoEntity loginUserInfo) {
-//	  LoginUserInfoEntity userInfo = loginService
-//      .selectByPrimaryKey(loginUserInfo);
-//	  JSONObject data = new JSONObject();
-//	  data.put("code", 0);
-//	  JSONObject json = new JSONObject();
-//	  json.put("token", userInfo.getToken());
-//	  data.put("data", json);
-//	return ResponseEntity.ok(data.toString());
-//  }
-
 	@PostMapping("/login")
-	public ResponseResult loginv2(@RequestBody LoginUserInfoEntity loginUserInfo) {
+	public ResponseResult login(@RequestBody LoginUserInfoEntity loginUserInfo) {
 		Employeeinfo employeeInfo = employerService.getEmployeeinfo(loginUserInfo.getUsername());
 		if(employeeInfo==null){
 			return new ResponseResult(ResponseCode.FAIL, String.format("login fail,user %s not exist",loginUserInfo.getUsername()),null);
