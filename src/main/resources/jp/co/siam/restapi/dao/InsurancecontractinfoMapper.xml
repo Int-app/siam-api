@@ -153,20 +153,20 @@
     <include refid="Base_Column_List" />
     from T_InsuranceContractInfo
     where DeleteFlag!=1
-    <if test="findParam.insurancecontractnumber!=null">
+    <if test="findParam.insurancecontractnumber!=null and findParam.insurancecontractnumber!=''">
       and InsuranceContractNumber = #{findParam.insurancecontractnumber}
     </if>
     <if test="findParam.employeeId!=null">
       and EmployeeId = #{findParam.employeeId}
     </if>
-    <if test="findParam.employeeName!=null">
+    <if test="findParam.employeeName!=null and findParam.employeeName!=''">
       and exists(
       select 1 from M_EmployeeInfo t1
       where t1.EmployeeId = T_InsuranceContractInfo.EmployeeId
       and t1.EmployeeName like concat('%', #{findParam.employeeName}, '%')
       )
     </if>
-    <if test="findParam.insuranceCompanyName!=null">
+    <if test="findParam.insuranceCompanyName!=null and findParam.insuranceCompanyName!=''">
       and exists(
       select 1 from M_InsuranceCompany t2
       where t2.InsuranceCompanyId = T_InsuranceContractInfo.InsuranceCompanyId
