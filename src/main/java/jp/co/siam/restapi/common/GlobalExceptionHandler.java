@@ -24,7 +24,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = Exception.class)
     public ResponseResult handle(Exception e){
         logger.error(e.getMessage(),e);
-        return new ResponseResult(ResponseCode.FAIL, e.getMessage(),null);
+        return new ResponseResult(ResponseCode.FAIL, "システムエラーです。管理者に連絡してください",null);
     }
 
     @ExceptionHandler(value = MethodArgumentNotValidException.class)

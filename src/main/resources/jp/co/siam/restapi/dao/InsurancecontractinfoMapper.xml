@@ -503,9 +503,6 @@
     -->
     update T_InsuranceContractInfo
     <set>
-      <if test="record.insurancecontractid != null">
-        InsuranceContractId = #{record.insurancecontractid,jdbcType=INTEGER},
-      </if>
       <if test="record.insurancecompanyid != null">
         InsuranceCompanyId = #{record.insurancecompanyid,jdbcType=CHAR},
       </if>
