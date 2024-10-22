@@ -8,6 +8,7 @@ import jp.co.siam.restapi.common.ResponseResult;
 import jp.co.siam.restapi.entity.Code;
 import jp.co.siam.restapi.entity.Insurancecontractinfo;
 import jp.co.siam.restapi.entity.InsurancecontractinfoFindParam;
+import jp.co.siam.restapi.entity.ZipCodeDto;
 import jp.co.siam.restapi.service.CodeService;
 import jp.co.siam.restapi.service.InsuranceContractInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,12 @@ public class CodeController {
                })
                .collect(Collectors.toList());
         return new ResponseResult(ResponseCode.SUCCESS, "",maps);
+    }
+
+    @GetMapping("/zip/{zipcode}")
+    public ResponseResult getAddress(@PathVariable("zipcode") String zipCode) {
+        ZipCodeDto dto = codeService.request(zipCode);
+        return new ResponseResult(ResponseCode.SUCCESS, "",dto);
     }
 
 }
