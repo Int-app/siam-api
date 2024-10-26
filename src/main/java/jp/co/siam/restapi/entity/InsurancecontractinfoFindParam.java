@@ -8,11 +8,17 @@ public class InsurancecontractinfoFindParam extends PagingParameter {
 
     private String insurancecontractnumber;
 
-    private Integer employeeId;
+    private String employeeId;
 
     private String employeeName;
 
+    public String getEmployeeId() {
+        return employeeId;
+    }
 
+    public void setEmployeeId(String employeeId) {
+        this.employeeId = employeeId;
+    }
 
     public String getInsurancecontractnumber() {
         return insurancecontractnumber;
@@ -22,13 +28,6 @@ public class InsurancecontractinfoFindParam extends PagingParameter {
         this.insurancecontractnumber = insurancecontractnumber;
     }
 
-    public Integer getEmployeeId() {
-        return employeeId;
-    }
-
-    public void setEmployeeId(Integer employeeId) {
-        this.employeeId = employeeId;
-    }
 
     public String getEmployeeName() {
         return employeeName;

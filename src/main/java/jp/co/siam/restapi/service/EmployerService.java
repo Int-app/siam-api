@@ -25,4 +25,9 @@ public class EmployerService {
             return employeeinfos.get(0);
         }
     }
+
+    public List<Employeeinfo> getEmployeeInfos(){
+        EmployeeinfoExample example = new EmployeeinfoExample();
+        return employeeinfoMapper.selectByExample(example);
+    }
 }

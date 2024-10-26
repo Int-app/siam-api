@@ -31,7 +31,7 @@ public class InsuranceCompanyController {
 
     @PostMapping("/list")
     @ApiOperation("list")
-    public ResponseResult<Map> getInsuranceContractInfos() {
+    public ResponseResult<Map> getinsuranceCompanys() {
         List<Insurancecompany> insurancecompanies = insuranceCompanyService.getList();
         List<Map> viewMaps = insurancecompanies.stream().sorted(Comparator.comparing(Insurancecompany::getInsuranceCompanyName))
                 .map(t->{
@@ -41,6 +41,15 @@ public class InsuranceCompanyController {
                     return viewMap;
                 })
                 .collect(Collectors.toList());
+        return new ResponseResult(ResponseCode.SUCCESS, "",viewMaps);
+    }
+
+    @PostMapping("/map")
+    @ApiOperation("map")
+    public ResponseResult<Map> getinsuranceCompanysMap() {
+        List<Insurancecompany> insurancecompanies = insuranceCompanyService.getList();
+        Map viewMaps = insurancecompanies.stream()
+                .collect(Collectors.toMap(Insurancecompany::getInsuranceCompanyId,Insurancecompany::getInsuranceCompanyName));
         return new ResponseResult(ResponseCode.SUCCESS, "",viewMaps);
     }
 }

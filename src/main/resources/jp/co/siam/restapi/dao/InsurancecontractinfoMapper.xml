@@ -154,7 +154,7 @@
     from T_InsuranceContractInfo
     where DeleteFlag!=1
     <if test="findParam.insurancecontractnumber!=null and findParam.insurancecontractnumber!=''">
-      and InsuranceContractNumber = #{findParam.insurancecontractnumber}
+      and InsurancePapersNo = #{findParam.insurancecontractnumber}
     </if>
     <if test="findParam.employeeId!=null">
       and EmployeeId = #{findParam.employeeId}

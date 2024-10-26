@@ -3,9 +3,11 @@ package jp.co.siam.restapi.controller;
 import jp.co.siam.restapi.common.ResponseCode;
 import jp.co.siam.restapi.common.ResponseResult;
 import jp.co.siam.restapi.entity.Employeeinfo;
+import jp.co.siam.restapi.entity.Insurancecontractinfo;
 import jp.co.siam.restapi.jwt.annotation.UserLoginToken;
 import jp.co.siam.restapi.jwt.service.TokenService;
 import jp.co.siam.restapi.service.EmployerService;
+import jp.co.siam.restapi.service.InsuranceCompanyService;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +16,7 @@ import jp.co.siam.restapi.entity.LoginUserInfoEntity;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/users")
@@ -21,6 +24,9 @@ public class LoginController {
 
 	@Autowired
 	EmployerService employerService;
+
+	@Autowired
+	InsuranceCompanyService insuranceCompanyService;
 
 	@Autowired
 	TokenService tokenService;
@@ -36,11 +42,28 @@ public class LoginController {
 			return new ResponseResult(ResponseCode.FAIL, "login fail,passwd is wrong",null);
 		}
 
+
 		String token = tokenService.getToken(employeeInfo);
-		Map data = new HashMap();
+		Map<String,String> data = new HashMap();
 		data.put("token", token);
+		data.put("employeeId",employeeInfo.getEmployeeid());
+		data.put("introduceremployeeid",employeeInfo.getIntroduceremployeeid());
+		data.put("role",employeeInfo.getRoleid());
+		data.put("employeeName",employeeInfo.getEmployeename());
+		String introduceremployeeName = getIntroducerEmployeeName(employeeInfo.getIntroduceremployeeid());
+		data.put("introduceremployeeName",introduceremployeeName);
 		return new ResponseResult(ResponseCode.SUCCESS, "login success",data);
   }
+
+	private String getIntroducerEmployeeName(String introduceremployeeid) {
+		Employeeinfo introduceremployeeinfo = employerService.getEmployeeinfo(introduceremployeeid);
+		if(!Objects.isNull(introduceremployeeinfo)){
+			return introduceremployeeinfo.getEmployeename();
+		}else{
+			return "";
+		}
+	}
+
 
   @GetMapping("/info")
   public ResponseEntity<String> info() {

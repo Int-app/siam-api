@@ -13,13 +13,21 @@ import org.springframework.util.CollectionUtils;
 import javax.validation.ValidationException;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class InsuranceContractInfoService {
 
 	@Autowired
 	InsurancecontractinfoMapper insurancecontractinfoMapper;
+
+	@Autowired
+	InsuranceCompanyService insuranceCompanyService;
+
+	@Autowired
+	EmployerService employerService;
 
 
 	public int updateInsurancecontractinfo(Insurancecontractinfo insurancecontractinfo) {
@@ -39,8 +47,22 @@ public class InsuranceContractInfoService {
 	public PageInfo<Insurancecontractinfo> getInsuranceContractInfoByPage(InsurancecontractinfoFindParam findParam) {
 		findParam.init();
 		PageHelper.startPage(findParam.getPageNum(), findParam.getPageSize());
-		List<Insurancecontractinfo> insurancecontractinfoWithBLOBs = insurancecontractinfoMapper.selectByFindParam(findParam);
-		return new PageInfo(insurancecontractinfoWithBLOBs);
+		List<Insurancecontractinfo> insurancecontractinfos = insurancecontractinfoMapper.selectByFindParam(findParam);
+
+		List<Insurancecompany> insurancecompanies = insuranceCompanyService.getList();
+		Map<String,String> companyMap = insurancecompanies.stream()
+				.collect(Collectors.toMap(Insurancecompany::getInsuranceCompanyId,Insurancecompany::getInsuranceCompanyName));
+
+
+		List<Employeeinfo> employeeinfos = employerService.getEmployeeInfos();
+		Map<String,String> employeeMap = employeeinfos.stream().collect(Collectors.toMap(Employeeinfo::getEmployeeid,Employeeinfo::getEmployeename));
+
+		insurancecontractinfos = insurancecontractinfos.stream().peek(t->{
+			t.setInsurancecompanyName(companyMap.get(t.getInsurancecompanyid()));
+			t.setEmployeeName(employeeMap.get(t.getEmployeeid()));
+			t.setTeamemployeeName(employeeMap.get(t.getTeamemployeeName()));
+		}).collect(Collectors.toList());
+		return new PageInfo(insurancecontractinfos);
 	}
 
 	public int deleteInsuranceContractInfo(Integer insurancecontractid) {

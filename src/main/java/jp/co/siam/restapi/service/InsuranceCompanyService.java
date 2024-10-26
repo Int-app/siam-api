@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 
 import javax.validation.ValidationException;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class InsuranceCompanyService {
@@ -22,5 +24,11 @@ public class InsuranceCompanyService {
     public List<Insurancecompany> getList(){
         InsurancecompanyExample example = new InsurancecompanyExample();
         return insurancecompanyMapper.selectByExample(example);
+    }
+
+    public Map<String,String> getCompanyMap(){
+        InsurancecompanyExample example = new InsurancecompanyExample();
+        List<Insurancecompany> insurancecompanies = insurancecompanyMapper.selectByExample(example);
+        return insurancecompanies.stream().collect(Collectors.toMap(Insurancecompany::getInsuranceCompanyId,Insurancecompany::getInsuranceCompanyName));
     }
 }
