@@ -167,11 +167,7 @@
       )
     </if>
     <if test="findParam.insuranceCompanyName!=null and findParam.insuranceCompanyName!=''">
-      and exists(
-      select 1 from M_InsuranceCompany t2
-      where t2.InsuranceCompanyId = T_InsuranceContractInfo.InsuranceCompanyId
-      and t2.InsuranceCompanyName like concat('%', #{findParam.insuranceCompanyName}, '%')
-      )
+        and InsuranceCompanyId = #{findParam.insuranceCompanyName}
     </if>
   </select>
 
