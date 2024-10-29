@@ -1,5 +1,6 @@
 package jp.co.siam.restapi.service;
 
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import jp.co.siam.restapi.dao.InsurancecontractinfoMapper;
@@ -46,7 +47,7 @@ public class InsuranceContractInfoService {
 
 	public PageInfo<Insurancecontractinfo> getInsuranceContractInfoByPage(InsurancecontractinfoFindParam findParam) {
 		findParam.init();
-		PageHelper.startPage(findParam.getPageNum(), findParam.getPageSize());
+		Page page =PageHelper.startPage(findParam.getPageNum(), findParam.getPageSize());
 		List<Insurancecontractinfo> insurancecontractinfos = insurancecontractinfoMapper.selectByFindParam(findParam);
 
 		List<Insurancecompany> insurancecompanies = insuranceCompanyService.getList();
@@ -62,7 +63,11 @@ public class InsuranceContractInfoService {
 			t.setEmployeeName(employeeMap.get(t.getEmployeeid()));
 			t.setTeamemployeeName(employeeMap.get(t.getTeamemployeeName()));
 		}).collect(Collectors.toList());
-		return new PageInfo(insurancecontractinfos);
+		PageInfo<Insurancecontractinfo> result = new PageInfo(insurancecontractinfos);
+		result.setPageNum(findParam.getPageNum());
+		result.setPageSize(findParam.getPageSize());
+		result.setTotal(page.getTotal());
+		return result;
 	}
 
 	public int deleteInsuranceContractInfo(Integer insurancecontractid) {
