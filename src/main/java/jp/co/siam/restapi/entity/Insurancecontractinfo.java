@@ -1,5 +1,6 @@
 package jp.co.siam.restapi.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -105,6 +106,7 @@ public class Insurancecontractinfo {
      */
     @ApiModelProperty("契約日")
     @NotNull(message = "contractdateにnullはできません")
+    @JsonFormat(pattern="yyyy/MM/dd")
     private Date contractdate;
 
     /**
@@ -116,6 +118,7 @@ public class Insurancecontractinfo {
      */
     @ApiModelProperty("保険開始日")
     @NotNull(message = "insurancestartdateにnullはできません")
+    @JsonFormat(pattern="yyyy/MM/dd")
     private Date insurancestartdate;
 
     /**
@@ -136,6 +139,7 @@ public class Insurancecontractinfo {
      * @mbg.generated
      */
     @ApiModelProperty("解約日")
+    @JsonFormat(pattern="yyyy/MM/dd")
     private Date cancellationdate;
 
     /**
@@ -263,6 +267,7 @@ public class Insurancecontractinfo {
      * @mbg.generated
      */
     @ApiModelProperty("生年月日")
+    @JsonFormat(pattern="yyyy/MM/dd")
     private Date birthday;
 
     /**
